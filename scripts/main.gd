@@ -40,6 +40,7 @@ func mazedraw() :
 			var shape = RectangleShape2D.new()
 			shape.size = Vector2(c_size,c_size)
 			collisonshape.shape = shape
+			collisonshape.position = Vector2(c_size / 2.0 , c_size /2.0 )
 			wallbody.add_child(collisonshape)
 			$mazecontainer.add_child(wallbody)
 			
