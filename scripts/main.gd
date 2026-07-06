@@ -6,6 +6,8 @@ const m_width = 21
 const m_hieght = 21
 
 
+var orbsleft = 0
+
 var m_gen :maze_gen
 
 var data :Array
@@ -19,7 +21,7 @@ func _ready() -> void:
 	
 	mazedraw()
 	$CharacterBody2D.position = Vector2(c_size + c_size/2.0,c_size + c_size /2.0 )
-	
+	spawnorbs()
 	
 func mazedraw() :
 	for y in range(m_hieght):
@@ -43,3 +45,18 @@ func mazedraw() :
 				$mazecontainer.add_child(wallbody)
 			
 	
+
+
+func spawnorbs() :
+	for y in range(m_hieght) :
+		for x in range(m_width) :
+			if not data[y][x] :
+				if x == 1 and y == 1 :
+					continue
+				var orbs = ColorRect.new()
+				orbs.size = Vector2(4,4)
+				orbs.position = Vector2( x*c_size + c_size/2.0 -2  , y * c_size +c_size/2.0 -2)
+				orbs.color=Color(1,.9,1)
+				orbs.name = "obs_%d_%d" %[x,y]
+				$mazecontainer.add_child(orbs)
+				
