@@ -15,7 +15,7 @@ var data :Array
 func _ready() -> void:
 	m_gen = maze_gen.new()
 	data = m_gen.generate(m_width,m_hieght)
-	
+	print("kk")
 	
 	mazedraw()
 	$CharacterBody2D.position = Vector2(c_size + c_size/2.0,c_size + c_size /2.0 )
@@ -31,17 +31,15 @@ func mazedraw() :
 				wall.color = Color(4.525, 4.525, 11.708, 1.0)
 				$mazecontainer.add_child(wall)
 	
-			var wallbody = StaticBody2D.new(
-				
-			)
-			wallbody.position =  Vector2(x*c_size,y * c_size)
+				var wallbody = StaticBody2D.new()
+				wallbody.position =  Vector2(x*c_size,y * c_size)
 			
-			var collisonshape =CollisionShape2D.new()
-			var shape = RectangleShape2D.new()
-			shape.size = Vector2(c_size,c_size)
-			collisonshape.shape = shape
-			collisonshape.position = Vector2(c_size / 2.0 , c_size /2.0 )
-			wallbody.add_child(collisonshape)
-			$mazecontainer.add_child(wallbody)
+				var collisonshape =CollisionShape2D.new()
+				var shape = RectangleShape2D.new()
+				shape.size = Vector2(c_size,c_size)
+				collisonshape.shape = shape
+				collisonshape.position = Vector2(c_size / 2.0 , c_size /2.0 )
+				wallbody.add_child(collisonshape)
+				$mazecontainer.add_child(wallbody)
 			
 	
