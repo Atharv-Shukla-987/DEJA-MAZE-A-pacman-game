@@ -7,6 +7,7 @@ const speed = 150
 func _ready() -> void:
 	$ColorRect.size = Vector2(20,20)
 	print("hello")
+	$Area2D.area_entered.connect(_on_area_2d_area_entered)
 
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
@@ -14,7 +15,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 	if Input.is_action_pressed("left"):
-		print("hello")
+		
 		inputdir.x = -1
 	if Input.is_action_pressed("rifht"):
 		inputdir.x = 1  
@@ -26,6 +27,14 @@ func _physics_process(delta: float) -> void:
 		inputdir.y =-1
 		
 		
-	print(inputdir,velocity)
+	
 	velocity = inputdir * speed
 	move_and_slide()  
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.is_in_group("orbs"):
+		print("kk")
+		area.queue_free()
+		get_parent().orbsleft -=1
+		

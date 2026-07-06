@@ -53,10 +53,27 @@ func spawnorbs() :
 			if not data[y][x] :
 				if x == 1 and y == 1 :
 					continue
-				var orbs = ColorRect.new()
-				orbs.size = Vector2(4,4)
-				orbs.position = Vector2( x*c_size + c_size/2.0 -2  , y * c_size +c_size/2.0 -2)
-				orbs.color=Color(1,.9,1)
-				orbs.name = "obs_%d_%d" %[x,y]
-				$mazecontainer.add_child(orbs)
+				var orbsarea = Area2D.new()
+				
+				orbsarea.position = Vector2( x*c_size + c_size/2.0   , y * c_size +c_size/2.0 )
+				orbsarea.add_to_group("orbs")
+				
+				var visuals = ColorRect.new()
+				visuals.size = Vector2(4,4)
+				visuals.position = Vector2( -2,-2)
+				
+				
+				visuals.color=Color(1,.9,1)
+				
+				orbsarea.add_child(visuals)
+				
+				var shape = CollisionShape2D.new()
+				var circle = CircleShape2D.new()
+				shape.shape = circle
+				circle.radius = 4
+				orbsarea.add_child(shape)
+				
+				
+				$mazecontainer.add_child(orbsarea)
+				orbsleft -=1 
 				

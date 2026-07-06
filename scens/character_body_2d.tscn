@@ -4,6 +4,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8xtmt"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iherx"]
+size = Vector2(23.5, 22)
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1941752872]
 script = ExtResource("1_8xtmt")
 
@@ -24,3 +27,8 @@ color = Color(1, 1, 0.078431375, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1686074324]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_8xtmt")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1413158969]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1479177335]
+shape = SubResource("RectangleShape2D_iherx")
