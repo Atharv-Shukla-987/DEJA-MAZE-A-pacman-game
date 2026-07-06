@@ -12,4 +12,4 @@ script = ExtResource("1_ig7tw")
 position = Vector2(343, 269)
 
 [node name="CharacterBody2D" parent="." unique_id=1941752872 instance=ExtResource("2_0xm2m")]
-position = Vector2(-27, 3)
+script = null

@@ -13,12 +13,12 @@ var data :Array
 
 
 func _ready() -> void:
-	m_gen = maze_gen.new(
-		
-	)
+	m_gen = maze_gen.new()
 	data = m_gen.generate(m_width,m_hieght)
 	
+	
 	mazedraw()
+	$CharacterBody2D.position = Vector2(c_size + c_size/2.0,c_size + c_size /2.0 )
 	
 	
 func mazedraw() :
