@@ -31,5 +31,16 @@ func mazedraw() :
 				wall.color = Color(4.525, 4.525, 11.708, 1.0)
 				$mazecontainer.add_child(wall)
 	
-	
+			var wallbody = StaticBody2D.new(
+				
+			)
+			wallbody.position =  Vector2(x*c_size,y * c_size)
+			
+			var collisonshape =CollisionShape2D.new()
+			var shape = RectangleShape2D.new()
+			shape.size = Vector2(c_size,c_size)
+			collisonshape.shape = shape
+			wallbody.add_child(collisonshape)
+			$mazecontainer.add_child(wallbody)
+			
 	

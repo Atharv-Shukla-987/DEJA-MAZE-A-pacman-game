@@ -1,8 +1,15 @@
 [gd_scene format=3 uid="uid://b4lhn0rgujuqb"]
 
 [ext_resource type="Script" uid="uid://cowec6ikymd1r" path="res://scripts/main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://cmplqqq6f0gd8" path="res://scens/character_body_2d.tscn" id="2_0xm2m"]
 
 [node name="Main" type="Node2D" unique_id=980908913]
 script = ExtResource("1_ig7tw")
 
 [node name="mazecontainer" type="Node2D" parent="." unique_id=1237603924]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1653090179]
+position = Vector2(343, 269)
+
+[node name="CharacterBody2D" parent="." unique_id=1941752872 instance=ExtResource("2_0xm2m")]
+position = Vector2(-27, 3)
