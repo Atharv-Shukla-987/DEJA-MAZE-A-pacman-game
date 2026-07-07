@@ -5,7 +5,7 @@ const c_size = 24
 const m_width = 21
 const m_hieght = 21
 
-
+var totalorbs = 0
 var orbsleft = 0
 
 var m_gen :maze_gen
@@ -15,6 +15,8 @@ var data :Array
 var echo_time = 6
 var echospawned = false
 
+var echo_playback_timr = 0.0
+var playback_interval = .1
 
 func _ready() -> void:
 	m_gen = maze_gen.new()
@@ -89,7 +91,8 @@ func spawnorbs() :
 				
 				
 				$mazecontainer.add_child(orbsarea)
-				orbsleft -=1 
+				orbsleft +=1
+				totalorbs = orbsleft 
 				
 				
 func echospawn():
@@ -119,8 +122,14 @@ func echospawn():
 func echomove() :
 	var echo = $mazecontainer.get_node_or_null("Echo")
 	if echo ==null:
-		print("no echo foud")
+		
 		return
+		
+	echo_playback_timr += get_process_delta_time()
+	if echo_playback_timr< playback_interval:
+		return
+	echo_playback_timr = 0
+	
 	var history = $CharacterBody2D.pos_history
 	
 	var index = echo.get_meta("playback_index")
@@ -132,3 +141,10 @@ func echomove() :
 	else:
 		echo.set_meta("playback_index",0)
 		
+
+func checkwin():
+	if totalorbs == 0:
+		return
+	var eaten = totalorbs-orbsleft
+	if eaten >= totalorbs*.8:
+		get_tree().reload_current_scene()
