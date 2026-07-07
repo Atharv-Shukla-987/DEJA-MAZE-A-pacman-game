@@ -2,8 +2,10 @@ extends CharacterBody2D
 
 
 const speed = 150 
+var pos_history : Array = []
 
-
+const history_intervel = .1
+var his_timmer = 0.0
 func _ready() -> void:
 	$ColorRect.size = Vector2(20,20)
 	print("hello")
@@ -30,11 +32,18 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = inputdir * speed
 	move_and_slide()  
-
-
+		
+	his_timmer += delta
+	if his_timmer >= history_intervel :
+		his_timmer = 0
+		pos_history.append(position)
+		
+	
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("orbs"):
-		print("kk")
+		
 		area.queue_free()
 		get_parent().orbsleft -=1
+	if area.is_in_group("echo"):
+		get_tree().reload_current_scene()
 		

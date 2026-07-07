@@ -19,7 +19,7 @@ var echospawned = false
 func _ready() -> void:
 	m_gen = maze_gen.new()
 	data = m_gen.generate(m_width,m_hieght)
-	print("kk")
+	
 	
 	mazedraw()
 	$CharacterBody2D.position = Vector2(c_size + c_size/2.0,c_size + c_size /2.0 )
@@ -27,10 +27,14 @@ func _ready() -> void:
 	
 	
 func _process(delta: float) -> void:
+	
 	if not echospawned and $CharacterBody2D.pos_history.size() > 0:
 		if $CharacterBody2D.pos_history.size() *.1 >echo_time :
 			echospawn()
 			echospawned = true
+			
+	if echospawned:
+		echomove()
 			
 	
 func mazedraw() :
@@ -89,23 +93,38 @@ func spawnorbs() :
 				
 				
 func echospawn():
-	var echo = ColorRect.new()
-	echo.size = Vector2(20,20)
-	echo.color = Color(1,0,0,)
-	echo.name = "ECHO"
+	var echo = Area2D.new()
+	
+	echo.name = "Echo"
+	
+	echo.add_to_group("echo")
+	var visual = ColorRect.new()
+	visual.size = Vector2(20,20 )
+	visual.position = Vector2(-10,-10)
+	
+	visual.color = Color(1,0,0)
+	echo.add_child(visual)
+	
+	var shape = CollisionShape2D.new()
+	var rec_shape = RectangleShape2D.new()
+	rec_shape.size = Vector2(20,20)
+	shape.shape = rec_shape
+	echo.add_child(shape)
+	
 	$mazecontainer.add_child(echo)
+	
 	echo.set_meta("playback_index",0)
-	echo.set_meta("isecho",0)
 	
 	
 func echomove() :
-	var echo = $mazecontainer.get_node_or_null("ECHO")
+	var echo = $mazecontainer.get_node_or_null("Echo")
 	if echo ==null:
+		print("no echo foud")
 		return
 	var history = $CharacterBody2D.pos_history
 	
 	var index = echo.get_meta("playback_index")
-		
+	print("echo imdex" ,index," / history size :",history.size(),"echo pos " ,echo.position)
 		
 	if index < history.size() :
 		echo.position = history[index]
