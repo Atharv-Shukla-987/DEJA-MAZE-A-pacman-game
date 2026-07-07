@@ -12,6 +12,8 @@ var m_gen :maze_gen
 
 var data :Array
 
+var echo_time = 6
+var echospawned = false
 
 
 func _ready() -> void:
@@ -22,6 +24,14 @@ func _ready() -> void:
 	mazedraw()
 	$CharacterBody2D.position = Vector2(c_size + c_size/2.0,c_size + c_size /2.0 )
 	spawnorbs()
+	
+	
+func _process(delta: float) -> void:
+	if not echospawned and $CharacterBody2D.pos_history.size() > 0:
+		if $CharacterBody2D.pos_history.size() *.1 >echo_time :
+			echospawn()
+			echospawned = true
+			
 	
 func mazedraw() :
 	for y in range(m_hieght):
@@ -77,3 +87,29 @@ func spawnorbs() :
 				$mazecontainer.add_child(orbsarea)
 				orbsleft -=1 
 				
+				
+func echospawn():
+	var echo = ColorRect.new()
+	echo.size = Vector2(20,20)
+	echo.color = Color(1,0,0,)
+	echo.name = "ECHO"
+	$mazecontainer.add_child(echo)
+	echo.set_meta("playback_index",0)
+	echo.set_meta("isecho",0)
+	
+	
+func echomove() :
+	var echo = $mazecontainer.get_node_or_null("ECHO")
+	if echo ==null:
+		return
+	var history = $CharacterBody2D.pos_history
+	
+	var index = echo.get_meta("playback_index")
+		
+		
+	if index < history.size() :
+		echo.position = history[index]
+		echo.set_meta("playback_index",index+1)
+	else:
+		echo.set_meta("playback_index",0)
+		
