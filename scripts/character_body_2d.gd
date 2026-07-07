@@ -1,4 +1,5 @@
 extends CharacterBody2D
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 
 const speed = 150 
@@ -46,5 +47,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		get_parent().orbsleft -=1
 		get_parent().checkwin()
 	if area.is_in_group("echo"):
+		audio_stream_player.play()
+		await audio_stream_player.finished
 		get_tree().change_scene_to_file("res://mainmenu.tscn")
 		

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cmplqqq6f0gd8"]
 
 [ext_resource type="Script" uid="uid://bvb4lg5u1hbwu" path="res://scripts/character_body_2d.gd" id="1_8xtmt"]
+[ext_resource type="AudioStream" uid="uid://ck3byt3px2y3k" path="res://scens/lucadialessandro-arcade-fx-288597.mp3" id="2_iherx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8xtmt"]
 
@@ -32,3 +33,6 @@ shape = SubResource("RectangleShape2D_8xtmt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1479177335]
 shape = SubResource("RectangleShape2D_iherx")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=583819820]
+stream = ExtResource("2_iherx")
