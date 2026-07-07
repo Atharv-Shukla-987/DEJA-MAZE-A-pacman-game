@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dive3saqq3jdl"]
+
+[ext_resource type="Texture2D" uid="uid://20gvhxge20ii" path="res://images.jpg" id="1_cmhrf"]
+[ext_resource type="Script" uid="uid://ditde03f11dug" path="res://mainmenu.gd" id="1_d2nv2"]
+
+[node name="mainmenu" type="Control" unique_id=1301446740]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d2nv2")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1100432663]
+layout_mode = 0
+offset_top = 3.0
+offset_right = 1152.0
+offset_bottom = 652.0
+texture = ExtResource("1_cmhrf")
+
+[node name="Button" type="Button" parent="." unique_id=338760599]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 294.0
+offset_right = 710.0
+offset_bottom = 343.0
+text = "START THE GAME"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

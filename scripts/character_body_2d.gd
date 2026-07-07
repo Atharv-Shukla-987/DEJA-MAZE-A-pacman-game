@@ -46,5 +46,5 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		get_parent().orbsleft -=1
 		get_parent().checkwin()
 	if area.is_in_group("echo"):
-		get_tree().reload_current_scene()
+		get_tree().change_scene_to_file("res://mainmenu.tscn")
 		
